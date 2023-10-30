@@ -20,6 +20,13 @@
   }
 {%- endstyle -%}
 
+{% liquid
+  assign product_collection = recommendations.products
+  if section.settings.use_upsells
+    assign product_collection = product.metafields.custom.upsells.value.basic_products.value
+  endif
+%}
+
 <div class="color-{{ section.settings.color_scheme }} gradient no-js-hidden">
   <product-recommendations
     class="related-products page-width section-{{ section.id }}-padding isolate{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}"
@@ -33,7 +40,7 @@
         class="grid product-grid grid--{{ section.settings.columns_desktop }}-col-desktop grid--{{ section.settings.columns_mobile }}-col-tablet-down"
         role="list"
       >
-        {% for recommendation in recommendations.products %}
+        {% for recommendation in product_collection %}
           <li class="grid__item">
             {% render 'card-product',
               card_product: recommendation,
@@ -68,6 +75,12 @@
       "id": "heading",
       "default": "You may also like",
       "label": "t:sections.related-products.settings.heading.label"
+    },
+    {
+      "type": "checkbox",
+      "id": "use_upsells",
+      "default": true,
+      "label": "t:sections.related-products.settings.use_upsells.label"
     },
     {
       "type": "select",
