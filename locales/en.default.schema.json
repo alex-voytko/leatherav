@@ -2783,7 +2783,7 @@
           "info": "To display a rating, add a product rating app. [Learn more](https:\/\/help.shopify.com\/manual\/online-store\/themes\/theme-structure\/page-types#product-recommendations-section-settings)"
         },
         "use_upsells": {
-          "label": "Use upsells"
+          "label": "Use upsells instead selected collection"
         },
         "header_mobile": {
           "content": "Mobile Layout"
@@ -2796,6 +2796,14 @@
           "options__2": {
             "label": "2 columns"
           }
+        }
+      }
+    },
+    "upsell-products": {
+      "name": "Upsell products",
+      "settings": {
+        "heading": {
+          "label": "Heading"
         }
       }
     },
