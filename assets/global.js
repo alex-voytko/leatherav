@@ -1227,8 +1227,13 @@ class ProductRecommendations extends HTMLElement {
     const handleIntersection = (entries, observer) => {
       if (!entries[0].isIntersecting) return;
       observer.unobserve(this);
-
-      fetch(this.dataset.url)
+      const productIdBuilder = () => {
+        const productIdQuery = 'product_id=';
+        const arr = this.dataset.url.split(productIdQuery);
+        const firstProductRef = document.querySelector('#CartItem-1');
+        return arr[0] + productIdQuery + firstProductRef?.dataset.productId + arr[1]
+      }
+      fetch(window.location.pathname === '/cart' ? productIdBuilder() : this.dataset.url)
         .then((response) => response.text())
         .then((text) => {
           const html = document.createElement('div');
